@@ -2,10 +2,7 @@
 
 /**
  * Connect to database
- */
-/**
- * PDO::FETCH_ASSOC: trả về dữ liệu dạng mảng với key là tên cột của bảng trong CSDL.
- */
+ **/
 
 function db()
 {
@@ -32,10 +29,8 @@ function db()
 function createStudent($values)
 {
     $conn = db();
-    //Prepared Statement để tránh bị tấn công SQL Injection.
-    ////Khởi tạo Prepared Statement
+
     $sttm = $conn->prepare('INSERT INTO student (profile, name, age, email) VALUES (:profile, :name, :age, :email)');
-    //bindParam($tên_place_holder, $giá_trị_của_place_holder)
     $sttm->bindParam(':profile', $values['profile']);
     $sttm->bindParam(':name', $values['name']);
     $sttm->bindParam(':age', $values['age']);
@@ -70,7 +65,6 @@ function selectOnestudent($id)
     $sttm = $conn->prepare("SELECT* FROM student WHERE id= $id");
     $sttm->execute();
     return $sttm->fetchAll(PDO::FETCH_ASSOC);
-    //PDO::FETCH_ASSOC: Trả về dữ liệu dạng mảng với key là tên của column (column của các table trong database)
 }
 
 /**
@@ -97,7 +91,6 @@ function updateStudent($id, $profile, $name, $age, $email)
 {
 
     $conn = db();
-    // Sử dụng prepared statement để tránh SQL injection
     $sttm = $conn->prepare("UPDATE student SET profile = :profile, name = :name, age = :age, email= :email WHERE id = :id");
     $sttm->bindParam(':id', $id);
     $sttm->bindParam(':profile', $profile);
@@ -105,7 +98,6 @@ function updateStudent($id, $profile, $name, $age, $email)
     $sttm->bindParam(':age', $age);
     $sttm->bindParam(':email', $email);
 
-    // Thực hiện truy vấn cập nhật
     if ($sttm->execute()) {
         echo "Cập nhập thành công";
     } else {

@@ -1,5 +1,5 @@
 <?php
-require_once('./database/database.php'); // để call function
+require_once('./database/database.php');
 
 $id =($_GET['id']);
 $profile = $_POST['image_url'];

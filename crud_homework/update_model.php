@@ -1,6 +1,7 @@
 <?php
 require_once('./database/database.php');
 
+
 $id =($_GET['id']);
 $profile = $_POST['image_url'];
 $name = $_POST['name'];
